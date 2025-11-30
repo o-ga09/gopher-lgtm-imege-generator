@@ -58,15 +58,6 @@ CLOUDFLARE_R2_PUBLIC_URL=https://pub-your_public_url.r2.dev
 CLOUDFLARE_R2_REGION=auto
 ```
 
-**CORS設定について:**
-
-- **local/dev環境**: `ALLOWED_ORIGINS=*` で全てのオリジンを許可
-- **prod環境**: 特定のオリジンのみを許可
-  ```env
-  ENV=prod
-  ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
-  ```
-
 1. 依存関係のインストール
 
 ```bash
