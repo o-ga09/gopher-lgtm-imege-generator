@@ -98,15 +98,77 @@ pnpm dev
 
 ## API エンドポイント
 
-### POST /api/generate
+### GET /v1/agent/list-apps
 
-LGTM画像を生成します。
+AIエージェント一覧を取得します。
+
+**レスポンス:**
+
+```json
+{
+  "apps": ["lgtm_image_generator"]
+}
+```
+
+### POST /v1/agent/apps/{app_name}/users/{user_id}/sessions
+
+セッションを作成します。
+
+**パラメータ:**
+- `app_name`: アプリケーション名（例: `lgtm_image_generator`）
+- `user_id`: ユーザーID（任意の文字列）
+
+**レスポンス:**
+
+```json
+{
+  "sessionId": "a2f792ad-cf72-4991-ad4a-2724159f0633"
+}
+```
+
+### POST /v1/agent/apps/{app_name}/users/{user_id}/sessions/{session_id}
+
+任意のIDでセッションを作成します。
+
+**パラメータ:**
+- `app_name`: アプリケーション名
+- `user_id`: ユーザーID
+- `session_id`: セッションID（指定したIDで作成）
+
+### GET /v1/agent/apps/{app_name}/users/{user_id}/sessions/{session_id}
+
+セッション情報を取得します。
+
+**レスポンス:**
+
+```json
+{
+  "sessionId": "a2f792ad-cf72-4991-ad4a-2724159f0633",
+  "appName": "lgtm_image_generator",
+  "userId": "user-123",
+  "createdAt": "2025-01-01T00:00:00Z"
+}
+```
+
+### POST /v1/agent/run
+
+AIエージェントを実行してLGTM画像を生成します。
 
 **リクエスト:**
 
 ```json
 {
-  "prompt": "Go Gopher doing something"
+  "appName": "lgtm_image_generator",
+  "userId": "user-123",
+  "sessionId": "session-id",
+  "newMessage": {
+    "role": "user",
+    "parts": [
+      {
+        "text": "Go Gopher giving thumbs up"
+      }
+    ]
+  }
 }
 ```
 
@@ -114,7 +176,39 @@ LGTM画像を生成します。
 
 ```json
 {
-  "imageUrl": "https://your-r2-public-url/lgtm-1234567890.png"
+  "message": {
+    "role": "model",
+    "parts": [
+      {
+        "text": "画像を生成しました"
+      }
+    ]
+  }
+}
+```
+
+### POST /v1/agent/run_sse
+
+SSE(Server-Sent Events)でAIエージェントを実行します。
+
+リクエストボディは `/v1/agent/run` と同じです。
+
+### GET /v1/images
+
+アップロードされた画像の一覧を取得します。
+
+**レスポンス:**
+
+```json
+{
+  "images": [
+    {
+      "key": "lgtm-1234567890.png",
+      "url": "https://your-r2-public-url/lgtm-1234567890.png",
+      "lastModified": "2025-01-01T00:00:00Z",
+      "size": 123456
+    }
+  ]
 }
 ```
 
