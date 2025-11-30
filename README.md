@@ -2,6 +2,10 @@
 
 Go Programming LanguageのマスコットキャラクターであるGo GopherくんのLGTM画像を生成するAIエージェントです。
 
+## 動作デモ
+
+https://github.com/user-attachments/assets/055034cc-dfc6-4b2e-964b-e956b783a8a6
+
 ## 技術スタック
 
 ### バックエンド
