@@ -46,19 +46,16 @@ cp .env.example .env
 `.env` ファイルを編集して、以下の値を設定してください：
 
 ```env
-GEMINI_API_KEY=your_gemini_api_key
-R2_ACCOUNT_ID=your_cloudflare_account_id
-R2_ACCESS_KEY_ID=your_r2_access_key_id
-R2_SECRET_ACCESS_KEY=your_r2_secret_access_key
-R2_BUCKET_NAME=your_r2_bucket_name
-R2_PUBLIC_URL=https://your-bucket-public-url
-
-# Server Configuration
-ENV=local
+ENV=DEV
 PORT=8080
-
-# CORS Configuration (本番環境では必ず設定してください)
-ALLOWED_ORIGINS=*
+GEMINI_API_KEY=your_gemini_api_key_here
+CLOUDFLARE_R2_ACCOUNT_ID=your_account_id_here
+CLOUDFLARE_R2_ACCESSKEY=your_access_key_here
+CLOUDFLARE_R2_SECRETKEY=your_secret_key_here
+CLOUDFLARE_R2_BUCKET_NAME=your_bucket_name_here
+CLOUDFLARE_R2_ENDPOINT=https://your_account_id.r2.cloudflarestorage.com
+CLOUDFLARE_R2_PUBLIC_URL=https://pub-your_public_url.r2.dev
+CLOUDFLARE_R2_REGION=auto
 ```
 
 **CORS設定について:**
